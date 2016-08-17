@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="45dp"
         android:hint="@string/add_title_hint"
         android:id="@+id/add_page_title"
         android:textSize="20sp"
-        android:maxLines="2"/>
+        android:maxLines="2"
+        android:layout_gravity="left"
+        android:gravity="top"/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -18,13 +20,15 @@
         android:src="@mipmap/spilt_line"
         android:scaleType="fitXY"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/add_page_content"
         android:hint="@string/add_content_hint"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_gravity="left"
+        android:gravity="top"/>
 
     <LinearLayout
         android:layout_width="match_parent"
