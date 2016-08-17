@@ -6,4 +6,5 @@
     <string name="add_content_hint">请输入事件文本说明</string>
     <string name="add_page_sure">确  认</string>
     <string name="add_page_cancel">取  消</string>
+    <string name="content_delete_button">删 除</string>
 </resources>

@@ -1,11 +1,15 @@
 package com.example.snapply.notebook;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -15,6 +19,14 @@ public class Content_Fragment extends Fragment {
 
     private View view;
 
+    private Context context;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,7 +34,39 @@ public class Content_Fragment extends Fragment {
         return view;
     }
 
-    public void refresh(String title,String content) {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button delete = (Button)view.findViewById(R.id.content_delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View view1 = view.findViewById(R.id.content);
+                view1.setVisibility(View.VISIBLE);
+                TextView titleView = (TextView)view1.findViewById(R.id.content_title);
+                TextView contentView = (TextView)view1.findViewById(R.id.content_content);
+                String title = titleView.getText().toString();
+                String content = contentView.getText().toString();
+                MySQLiteOpenHelper dbhelper = new MySQLiteOpenHelper(context,"Data",null,1);
+                SQLiteDatabase db = dbhelper.getWritableDatabase();
+                db.beginTransaction();
+                try {
+                    if (!title.isEmpty())
+                        db.delete("Data","title = ?",new String[]{title});
+                    if (!content.isEmpty())
+                        db.delete("Data","content = ?",new String[]{content});
+                    db.setTransactionSuccessful();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    db.endTransaction();
+                    db.close();
+                }
+            }
+        });
+    }
+
+    public void refresh(String title, String content) {
         View view1 = view.findViewById(R.id.content);
         view1.setVisibility(View.VISIBLE);
         TextView newTitle = (TextView)view1.findViewById(R.id.content_title);
