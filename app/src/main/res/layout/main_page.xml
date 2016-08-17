@@ -7,12 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
@@ -32,9 +28,13 @@
                 android:textSize="15sp"
                 android:id="@+id/add_button"/>
 
-        </LinearLayout>
-
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@mipmap/spilt_line"
+        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,12 +49,19 @@
             android:id="@+id/title_fragment"
             android:layout_weight="1"/>
 
-        <fragment
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:name="com.example.snapply.notebook.Content_Fragment"
-            android:id="@+id/content_fragment"
-            android:layout_weight="3"/>
+            android:layout_weight="3">
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.example.snapply.notebook.Content_Fragment"
+                android:id="@+id/content_fragment" />
+
+        </FrameLayout>
+
 
     </LinearLayout>
 

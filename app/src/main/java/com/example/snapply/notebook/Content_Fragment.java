@@ -12,6 +12,7 @@ import android.widget.TextView;
  * Created by luweiling on 2016/8/16 0016.
  */
 public class Content_Fragment extends Fragment {
+
     private View view;
 
     @Nullable
@@ -23,6 +24,7 @@ public class Content_Fragment extends Fragment {
 
     public void refresh(String title,String content) {
         View view1 = view.findViewById(R.id.content);
+        view1.setVisibility(View.VISIBLE);
         TextView newTitle = (TextView)view1.findViewById(R.id.content_title);
         TextView newContent = (TextView)view1.findViewById(R.id.content_content);
         newTitle.setText(title);

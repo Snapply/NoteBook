@@ -29,14 +29,25 @@ public class Main_Page extends Activity {
         title = intent.getStringExtra("add_title");
         content = intent.getStringExtra("add_content");
         MySQLiteOpenHelper dbHelper = new MySQLiteOpenHelper(this,"Data",null,1);
-        dbHelper.getWritableDatabase();
+        //dbHelper.getWritableDatabase();
         if (!title.isEmpty() && !content.isEmpty()) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put("title",title);
-            values.put("content",content);
-            db.insert("Data",null,values);
-            values.clear();
+
+            //使用事物
+            db.beginTransaction();
+            try {
+                ContentValues values = new ContentValues();
+                values.put("title",title);
+                values.put("content",content);
+                db.insert("Data",null,values);
+                db.setTransactionSuccessful();
+                values.clear();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                db.endTransaction();
+            }
+            db.close();
         }
         */
         Button add = (Button)findViewById(R.id.add_button);
