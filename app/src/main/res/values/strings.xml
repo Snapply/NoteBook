@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">记事本</string>
-    <string name="title_text">时间记录本</string>
+    <string name="title_text">事件记录本</string>
     <string name="add_button">新增</string>
+    <string name="add_title_hint">请输入事件标题</string>
+    <string name="add_content_hint">请输入事件文本说明</string>
+    <string name="add_page_sure">确  认</string>
+    <string name="add_page_cancel">取  消</string>
 </resources>

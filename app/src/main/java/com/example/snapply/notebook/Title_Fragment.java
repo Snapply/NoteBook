@@ -40,7 +40,8 @@ public class Title_Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Note note = titleList.get(i);
-
+                Content_Fragment content_fragment = (Content_Fragment)getFragmentManager().findFragmentById(R.id.content_fragment);
+                content_fragment.refresh(note.getTitle(),note.getContent());
             }
         });
         return view;
