@@ -2,6 +2,8 @@ package com.example.snapply.notebook;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -23,10 +25,13 @@ public class Title_Fragment extends Fragment {
 
     private NoteAdapter adapter;
 
+    private MySQLiteOpenHelper dbHelper;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        titleList = new ArrayList<Note>();
+        dbHelper = new MySQLiteOpenHelper(activity,"Data",null,1);
+        titleList = init();
         adapter = new NoteAdapter(activity,R.layout.title_list_item,titleList);
     }
 
@@ -45,5 +50,22 @@ public class Title_Fragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private List<Note> init(){
+        List<Note> notes = new ArrayList<Note>();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("Data",null,null,null,null,null,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Note note = new Note();
+                String title = cursor.getString(cursor.getColumnIndex("title"));
+                String content = cursor.getString(cursor.getColumnIndex("content"));
+                note.setTitle(title);
+                note.setContent(content);
+                notes.add(note);
+            } while (cursor.moveToNext());
+        }
+        return notes;
     }
 }
