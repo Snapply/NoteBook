@@ -37,9 +37,17 @@ public class Title_Fragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d("TAG", "Title_Fragment onAttach: ");
         dbHelper = new MySQLiteOpenHelper(activity,"Data",null,1);
         noteList = init();
         adapter = new NoteAdapter(activity,R.layout.title_list_item, noteList);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("TAG", "Title_Fragment onCreate: ");
     }
 
     @Nullable
@@ -51,6 +59,7 @@ public class Title_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.index_frag,container,false);
         titleListView = (ListView)view.findViewById(R.id.index_list_frag);
         titleListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         titleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -59,7 +68,57 @@ public class Title_Fragment extends Fragment {
                 content_fragment.refresh(note.getTitle(),note.getContent());
             }
         });
+        Log.d("TAG", "Title_Fragment onCreateView: ");
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d("TAG", "Title_Fragment onActivityCreated: ");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("TAG", "Title_Fragment onStart: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("TAG", "Title_Fragment onResume: ");
+        //adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("TAG", "Title_Fragment onPause: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("TAG", "Title_Fragment onStop: ");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("TAG", "Title_Fragment onDestroyView: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("TAG", "Title_Fragment onDestroy: ");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("TAG", "Title_Fragment onDetach: ");
     }
 
     public void delete_refresh(){
@@ -72,10 +131,13 @@ public class Title_Fragment extends Fragment {
         onAttach(getActivity());
         onCreateView(layoutInflater,viewGroup,bundle);
         */
-        onDetach();
-        noteList.clear();
-        onAttach(getActivity());
-        onCreateView(layoutInflater,viewGroup,bundle);
+        //noteList.clear();
+        //onDestroyView();
+        //adapter.notifyDataSetChanged();
+        //onDetach();
+        //onAttach(getActivity());
+        //titleListView.clearChoices();
+        //onCreateView(layoutInflater,viewGroup,bundle);
     }
 
     private List<Note> init(){
