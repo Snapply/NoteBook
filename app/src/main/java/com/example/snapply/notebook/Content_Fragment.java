@@ -73,10 +73,10 @@ public class Content_Fragment extends Fragment {
                             db.endTransaction();
                             db.close();
                         }
+                        Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
+                        title_fragment.delete_refresh(title,content);
                     }
                 });
-                Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
-                title_fragment.delete_refresh();
                 alert.setNegativeButton("取 消",null);
                 alert.show();
             }

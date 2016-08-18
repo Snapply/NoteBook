@@ -62,11 +62,21 @@ public class Title_Fragment extends Fragment {
         return view;
     }
 
-    public void delete_refresh(){
+    public void delete_refresh(String title,String content){
+        /*
+        Note note = new Note();
+        note.setTitle(title);
+        note.setContent(content);
+        noteList.remove(note);
+        onDestroyView();
         onAttach(getActivity());
-        onCreate(bundle);
+        onCreateView(layoutInflater,viewGroup,bundle);
+        */
+        onDetach();
+        onAttach(getActivity());
         onCreateView(layoutInflater,viewGroup,bundle);
     }
+
     private List<Note> init(){
         List<Note> notes = new ArrayList<Note>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
