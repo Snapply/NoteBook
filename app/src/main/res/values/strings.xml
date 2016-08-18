@@ -7,4 +7,6 @@
     <string name="add_page_sure">确  认</string>
     <string name="add_page_cancel">取  消</string>
     <string name="content_delete_button">删 除</string>
+    <string name="delete_warning_title">删除警告</string>
+    <string name="delete_warning_message">确认删除此条信息吗？</string>
 </resources>

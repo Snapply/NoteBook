@@ -1,8 +1,11 @@
 package com.example.snapply.notebook;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,29 +44,47 @@ public class Content_Fragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View view1 = view.findViewById(R.id.content);
-                view1.setVisibility(View.VISIBLE);
-                TextView titleView = (TextView)view1.findViewById(R.id.content_title);
-                TextView contentView = (TextView)view1.findViewById(R.id.content_content);
-                String title = titleView.getText().toString();
-                String content = contentView.getText().toString();
-                MySQLiteOpenHelper dbhelper = new MySQLiteOpenHelper(context,"Data",null,1);
-                SQLiteDatabase db = dbhelper.getWritableDatabase();
-                db.beginTransaction();
-                try {
-                    if (!title.isEmpty())
-                        db.delete("Data","title = ?",new String[]{title});
-                    if (!content.isEmpty())
-                        db.delete("Data","content = ?",new String[]{content});
-                    db.setTransactionSuccessful();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    db.endTransaction();
-                    db.close();
-                }
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setTitle("Warning");
+                alert.setMessage("确认删除此条信息吗？");
+                alert.setPositiveButton("确 定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        View view1 = Content_Fragment.this.view.findViewById(R.id.content);
+                        view1.setVisibility(View.INVISIBLE);
+                        TextView titleView = (TextView)view1.findViewById(R.id.content_title);
+                        TextView contentView = (TextView)view1.findViewById(R.id.content_content);
+                        String title = titleView.getText().toString();
+                        String content = contentView.getText().toString();
+                        MySQLiteOpenHelper dbhelper = new MySQLiteOpenHelper(context,"Data",null,1);
+                        SQLiteDatabase db = dbhelper.getWritableDatabase();
+                        db.beginTransaction();
+                        try {
+                            if (!title.isEmpty())
+                                db.delete("Data","title = ?",new String[]{title});
+                            if (!content.isEmpty())
+                                db.delete("Data","content = ?",new String[]{content});
+                            db.setTransactionSuccessful();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            db.endTransaction();
+                            db.close();
+                        }
+                    }
+                });
+                Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
+                title_fragment.delete_refresh();
+                alert.setNegativeButton("取 消",null);
+                alert.show();
             }
         });
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     public void refresh(String title, String content) {

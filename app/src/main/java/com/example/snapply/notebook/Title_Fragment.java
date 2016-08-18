@@ -28,6 +28,12 @@ public class Title_Fragment extends Fragment {
 
     private MySQLiteOpenHelper dbHelper;
 
+    private LayoutInflater layoutInflater;
+
+    private ViewGroup viewGroup;
+
+    private Bundle bundle;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -39,6 +45,9 @@ public class Title_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        layoutInflater = inflater;
+        viewGroup = container;
+        bundle = savedInstanceState;
         View view = inflater.inflate(R.layout.index_frag,container,false);
         titleListView = (ListView)view.findViewById(R.id.index_list_frag);
         titleListView.setAdapter(adapter);
@@ -53,6 +62,11 @@ public class Title_Fragment extends Fragment {
         return view;
     }
 
+    public void delete_refresh(){
+        onAttach(getActivity());
+        onCreate(bundle);
+        onCreateView(layoutInflater,viewGroup,bundle);
+    }
     private List<Note> init(){
         List<Note> notes = new ArrayList<Note>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
