@@ -72,7 +72,8 @@ public class Title_Fragment extends Fragment {
         onAttach(getActivity());
         onCreateView(layoutInflater,viewGroup,bundle);
         */
-        //onDetach();
+        onDetach();
+        noteList.clear();
         onAttach(getActivity());
         onCreateView(layoutInflater,viewGroup,bundle);
     }

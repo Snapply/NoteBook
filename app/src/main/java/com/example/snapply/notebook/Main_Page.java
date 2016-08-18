@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -16,7 +17,7 @@ import android.widget.Button;
  */
 public class Main_Page extends Activity {
 
-    private Deleete_Broadcast deleete_broadcast;
+    private Delete_Broadcast delete_broadcast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +35,20 @@ public class Main_Page extends Activity {
         });
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("delete_message");
-        deleete_broadcast = new Deleete_Broadcast();
-        registerReceiver(deleete_broadcast,intentFilter);
+        delete_broadcast = new Delete_Broadcast();
+        registerReceiver(delete_broadcast,intentFilter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(deleete_broadcast);
+        unregisterReceiver(delete_broadcast);
     }
 
-    class Deleete_Broadcast extends BroadcastReceiver {
+    class Delete_Broadcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Toast.makeText(Main_Page.this, "Broadcast Recevied", Toast.LENGTH_SHORT).show();
             Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
             title_fragment.delete_refresh();
         }
