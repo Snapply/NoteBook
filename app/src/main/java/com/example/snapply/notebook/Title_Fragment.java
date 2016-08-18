@@ -98,7 +98,9 @@ public class Title_Fragment extends Fragment {
             renote.setContent(recontent);
             //noteList.remove(renote);
             noteList.clear();
-            noteList = init();
+            List<Note> newlist = new ArrayList<>();
+            newlist = init();
+            noteList.addAll(newlist);
             adapter.notifyDataSetChanged();
             //titleListView.refreshDrawableState();
             Log.d("TAG", "广播测试");
