@@ -84,8 +84,8 @@ public class Title_Fragment extends Fragment {
                 Note note = new Note();
                 String title = cursor.getString(cursor.getColumnIndex("title"));
                 String content = cursor.getString(cursor.getColumnIndex("content"));
-                Log.d("TAG", "Title_Fragment init: title-"+title);
-                Log.d("TAG", "Title_Fragment init: content-"+content);
+                //Log.d("TAG", "Title_Fragment init: title-"+title);
+                //Log.d("TAG", "Title_Fragment init: content-"+content);
                 note.setTitle(title);
                 note.setContent(content);
                 notes.add(note);

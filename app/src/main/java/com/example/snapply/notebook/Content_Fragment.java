@@ -3,12 +3,12 @@ package com.example.snapply.notebook;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +44,11 @@ public class Content_Fragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("TAG", "delete_button onClick: ");
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setTitle("Warning");
                 alert.setMessage("确认删除此条信息吗？");
+                alert.setCancelable(false);
                 alert.setPositiveButton("确 定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
