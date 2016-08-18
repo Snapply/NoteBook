@@ -28,6 +28,12 @@ public class Title_Fragment extends Fragment {
 
     private MySQLiteOpenHelper dbHelper;
 
+    private LayoutInflater layoutInflater;
+
+    private ViewGroup viewGroup;
+
+    private Bundle bundle;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -39,6 +45,9 @@ public class Title_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        layoutInflater = inflater;
+        viewGroup = container;
+        bundle = savedInstanceState;
         View view = inflater.inflate(R.layout.index_frag,container,false);
         titleListView = (ListView)view.findViewById(R.id.index_list_frag);
         titleListView.setAdapter(adapter);
@@ -51,6 +60,21 @@ public class Title_Fragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public void delete_refresh(String title,String content){
+        /*
+        Note note = new Note();
+        note.setTitle(title);
+        note.setContent(content);
+        noteList.remove(note);
+        onDestroyView();
+        onAttach(getActivity());
+        onCreateView(layoutInflater,viewGroup,bundle);
+        */
+        onDetach();
+        onAttach(getActivity());
+        onCreateView(layoutInflater,viewGroup,bundle);
     }
 
     private List<Note> init(){
@@ -70,8 +94,8 @@ public class Title_Fragment extends Fragment {
                 Note note = new Note();
                 String title = cursor.getString(cursor.getColumnIndex("title"));
                 String content = cursor.getString(cursor.getColumnIndex("content"));
-                Log.d("TAG", "Title_Fragment init: title-"+title);
-                Log.d("TAG", "Title_Fragment init: content-"+content);
+                //Log.d("TAG", "Title_Fragment init: title-"+title);
+                //Log.d("TAG", "Title_Fragment init: content-"+content);
                 note.setTitle(title);
                 note.setContent(content);
                 notes.add(note);
