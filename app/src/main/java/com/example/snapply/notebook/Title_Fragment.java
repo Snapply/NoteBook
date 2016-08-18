@@ -24,15 +24,17 @@ public class Title_Fragment extends Fragment {
 
     private List<Note> noteList;
 
-    private NoteAdapter adapter;
+    public NoteAdapter adapter;
 
     private MySQLiteOpenHelper dbHelper;
 
-    private LayoutInflater layoutInflater;
+    public LayoutInflater layoutInflater;
 
-    private ViewGroup viewGroup;
+    public ViewGroup viewGroup;
 
-    private Bundle bundle;
+    public Bundle bundle;
+
+    private View view;
 
     @Override
     public void onAttach(Activity activity) {
@@ -56,7 +58,7 @@ public class Title_Fragment extends Fragment {
         layoutInflater = inflater;
         viewGroup = container;
         bundle = savedInstanceState;
-        View view = inflater.inflate(R.layout.index_frag,container,false);
+        view = inflater.inflate(R.layout.index_frag,container,false);
         titleListView = (ListView)view.findViewById(R.id.index_list_frag);
         titleListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -122,28 +124,11 @@ public class Title_Fragment extends Fragment {
     }
 
     public void delete_refresh(){
-        /*
-        Note note = new Note();
-        note.setTitle(title);
-        note.setContent(content);
-        noteList.remove(note);
-        onDestroyView();
-        onAttach(getActivity());
-        onCreateView(layoutInflater,viewGroup,bundle);
-        */
-        //noteList.clear();
-        //onDestroyView();
-        //adapter.notifyDataSetChanged();
-        //onDetach();
-        //onAttach(getActivity());
-        //titleListView.clearChoices();
-        //onCreateView(layoutInflater,viewGroup,bundle);
-        this.onStop();
-        this.onDestroyView();
-        this.onDestroy();
-        this.onCreateView(layoutInflater,viewGroup,bundle);
     }
 
+    public Fragment delete() {
+        return this;
+    }
     private List<Note> init(){
         List<Note> notes = new ArrayList<Note>();
         SQLiteDatabase db = dbHelper.getWritableDatabase();

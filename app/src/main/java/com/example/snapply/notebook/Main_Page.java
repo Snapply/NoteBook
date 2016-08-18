@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -80,9 +81,11 @@ public class Main_Page extends Activity {
         public void onReceive(Context context, Intent intent) {
             Log.d("TAG", "Broadcast onReceive: ");
             Toast.makeText(Main_Page.this, "Broadcast Recevied", Toast.LENGTH_SHORT).show();
-            //Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
+            Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
             //title_fragment.delete_refresh();
             //onResume();
+            //title_fragment.onDestroyView();
+            //title_fragment.onCreateView(title_fragment.layoutInflater,title_fragment.viewGroup,title_fragment.bundle);
         }
     }
 }
