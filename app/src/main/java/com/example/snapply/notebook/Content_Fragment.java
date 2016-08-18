@@ -6,9 +6,11 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,9 +78,14 @@ public class Content_Fragment extends Fragment {
                         }
                         //Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
                         //title_fragment.delete_refresh(title,content);
-                        Intent intent = new Intent(getActivity(),Main_Page.class);
-                        startActivity(intent);
-                        getActivity().finish();
+                        //Intent intent = new Intent(getActivity(),Main_Page.class);
+                        //startActivity(intent);
+                        //getActivity().finish();
+                        Intent intent = new Intent("delete_message");
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                        IntentFilter intentfilter = new IntentFilter();
+                        intentfilter.addAction("delete_message");
+                        LocalBroadcastManager.getInstance(context).registerReceiver(null,intentfilter);
                     }
                 });
                 alert.setNegativeButton("取 消",null);

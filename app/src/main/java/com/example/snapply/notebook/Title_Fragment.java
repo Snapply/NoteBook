@@ -62,7 +62,7 @@ public class Title_Fragment extends Fragment {
         return view;
     }
 
-    public void delete_refresh(String title,String content){
+    public void delete_refresh(){
         /*
         Note note = new Note();
         note.setTitle(title);
@@ -72,7 +72,7 @@ public class Title_Fragment extends Fragment {
         onAttach(getActivity());
         onCreateView(layoutInflater,viewGroup,bundle);
         */
-        onDetach();
+        //onDetach();
         onAttach(getActivity());
         onCreateView(layoutInflater,viewGroup,bundle);
     }
