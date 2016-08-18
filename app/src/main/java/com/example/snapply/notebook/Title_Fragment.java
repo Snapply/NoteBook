@@ -138,6 +138,10 @@ public class Title_Fragment extends Fragment {
         //onAttach(getActivity());
         //titleListView.clearChoices();
         //onCreateView(layoutInflater,viewGroup,bundle);
+        this.onStop();
+        this.onDestroyView();
+        this.onDestroy();
+        this.onCreateView(layoutInflater,viewGroup,bundle);
     }
 
     private List<Note> init(){

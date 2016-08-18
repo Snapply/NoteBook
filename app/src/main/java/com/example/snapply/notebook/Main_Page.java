@@ -71,8 +71,8 @@ public class Main_Page extends Activity {
     protected void onResume() {
         super.onResume();
         Log.d("TAG", "Main_Page onResume: ");
-        Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
-        title_fragment.onResume();
+        //Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
+        //title_fragment.onResume();
     }
 
     class Delete_Broadcast extends BroadcastReceiver {
