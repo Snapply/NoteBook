@@ -80,12 +80,13 @@ public class Main_Page extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("TAG", "Broadcast onReceive: ");
-            Toast.makeText(Main_Page.this, "Broadcast Recevied", Toast.LENGTH_SHORT).show();
-            Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
+            Toast.makeText(Main_Page.this, "Main_Page Broadcast Recevied", Toast.LENGTH_SHORT).show();
+            //Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
             //title_fragment.delete_refresh();
             //onResume();
             //title_fragment.onDestroyView();
             //title_fragment.onCreateView(title_fragment.layoutInflater,title_fragment.viewGroup,title_fragment.bundle);
+            //onResume();
         }
     }
 }

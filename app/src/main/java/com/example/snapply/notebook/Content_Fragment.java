@@ -81,6 +81,8 @@ public class Content_Fragment extends Fragment {
                         //startActivity(intent);
                         //getActivity().finish();
                         Intent intent = new Intent("delete_message");
+                        intent.putExtra("title",title);
+                        intent.putExtra("content",content);
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     }
                 });

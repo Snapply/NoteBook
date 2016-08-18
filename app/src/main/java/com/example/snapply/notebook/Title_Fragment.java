@@ -2,16 +2,22 @@ package com.example.snapply.notebook;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +26,7 @@ import java.util.List;
  * Created by luweiling on 2016/8/16 0016.
  */
 public class Title_Fragment extends Fragment {
+
     private ListView titleListView;
 
     private List<Note> noteList;
@@ -36,6 +43,8 @@ public class Title_Fragment extends Fragment {
 
     private View view;
 
+    private Delete_Broadcast delete_message;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -50,6 +59,10 @@ public class Title_Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("TAG", "Title_Fragment onCreate: ");
+        IntentFilter intentfilter1 = new IntentFilter();
+        intentfilter1.addAction("delete_message");
+        delete_message = new Delete_Broadcast();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(delete_message,intentfilter1);
     }
 
     @Nullable
@@ -61,7 +74,6 @@ public class Title_Fragment extends Fragment {
         view = inflater.inflate(R.layout.index_frag,container,false);
         titleListView = (ListView)view.findViewById(R.id.index_list_frag);
         titleListView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
         titleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -72,6 +84,25 @@ public class Title_Fragment extends Fragment {
         });
         Log.d("TAG", "Title_Fragment onCreateView: ");
         return view;
+    }
+
+    class Delete_Broadcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("TAG", "Title_Fragment Broadcast received");
+            Toast.makeText(getActivity(), "Title_Fragment Received", Toast.LENGTH_SHORT).show();
+            String retitle = intent.getStringExtra("title");
+            String recontent = intent.getStringExtra("content");
+            Note renote = new Note();
+            renote.setTitle(retitle);
+            renote.setContent(recontent);
+            //noteList.remove(renote);
+            noteList.clear();
+            noteList = init();
+            adapter.notifyDataSetChanged();
+            //titleListView.refreshDrawableState();
+            Log.d("TAG", "广播测试");
+        }
     }
 
     @Override
@@ -115,6 +146,7 @@ public class Title_Fragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         Log.d("TAG", "Title_Fragment onDestroy: ");
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(delete_message);
     }
 
     @Override
