@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,6 @@ public class Content_Fragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "delete_button onClick: ");
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setTitle("Warning");
                 alert.setMessage("确认删除此条信息吗？");
@@ -75,11 +73,6 @@ public class Content_Fragment extends Fragment {
                             db.endTransaction();
                             db.close();
                         }
-                        //Title_Fragment title_fragment = (Title_Fragment)getFragmentManager().findFragmentById(R.id.title_fragment);
-                        //title_fragment.delete_refresh(title,content);
-                        //Intent intent = new Intent(getActivity(),Main_Page.class);
-                        //startActivity(intent);
-                        //getActivity().finish();
                         Intent intent = new Intent("delete_message");
                         intent.putExtra("title",title);
                         intent.putExtra("content",content);
@@ -90,12 +83,6 @@ public class Content_Fragment extends Fragment {
                 alert.show();
             }
         });
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     public void refresh(String title, String content) {

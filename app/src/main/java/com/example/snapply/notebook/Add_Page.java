@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by luweiling on 2016/8/17 0017.
@@ -35,23 +34,9 @@ public class Add_Page extends Activity {
         addSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                MySQLiteOpenHelper dbHelper = new MySQLiteOpenHelper(Add_Page.this,"Data",null,1);
-                dbHelper.getWritableDatabase();
-                if (!(title.isEmpty()) && !(content.isEmpty())) {
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    ContentValues values = new ContentValues();
-                    values.put("title",title);
-                    values.put("content",content);
-                    db.insert("Data",null,values);
-                    values.clear();
-                }
-                */
                 String title = addTitle.getText().toString();
                 String content = addContent.getText().toString();
                 Intent intent = new Intent(Add_Page.this,Main_Page.class);
-                //intent.putExtra("add_title",title);
-                //intent.putExtra("add_content",content);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 try {
                     db.beginTransaction();

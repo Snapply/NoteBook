@@ -24,6 +24,10 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        switch (i1) {
+            case 1:
+                sqLiteDatabase.execSQL(create_database);
+            default:
+        }
     }
 }
